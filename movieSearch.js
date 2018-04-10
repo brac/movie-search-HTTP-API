@@ -20,7 +20,8 @@ const movieSearch = (query) => {
               name: $(elem).text().split('-')[0].split(' (')[0].trim(),
               date: $(elem).text().split('-')[0].split(' (')[1].trim().slice(0, -1)
             }
-          }).toArray()
+          })
+          .toArray()
         resolve(movies)
       })
       .catch(err => reject(err))
