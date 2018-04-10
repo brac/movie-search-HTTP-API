@@ -10,13 +10,13 @@ A web server using Express that exposes a Movie Search HTTP API which fetches re
 - response header `content-type` is `application/json`
 - any requests under the `/api/` namespace should render `JSON`
 
-## Required Routes:
+## Usage:
 ```
 request: GET /api/imdb/search/:query
 response: {"movies": [{name: "<movie-name>", year: "<year-released>"}]}
 ```
 
-## Example Request
+## Example:
 Doing a `GET` to `/api/search/findingnemo` should render something like:
 
 ```json
@@ -32,75 +32,5 @@ Doing a `GET` to `/api/search/findingnemo` should render something like:
   ]
 }
 ```
-
-## Hint
-- Sample IMDB search url : `http://www.imdb.com/find?ref_=nv_sr_fn&q=findingnemo&s=all`. Replace `findingnemo` with the dynamic search term.
-
-
-### The Plan
-* Install
-  * Express
-  * cheerio
-  * body-parser
-  * request-promise
-* Build
-  * server
-    * app.js
-      * configuration
-        * content-type : application/json
-          * Set either as individual get responses with res.json()
-        * body-parser.json, urlextended : true
-      * default route
-      * api register routes
-      * error handlers
-        * status codes
-  * api routes
-    * GET /api/movies/:query
-    * ```response: {"movies": [{name: "<movie-name>", year: "<year-released>"}]}```
-    *   Not Found response
-* Refactor
-  * Sepearte Routes
-  * Request
-  * String Parsing / Object formatting
-
-- Stretch Goals
- - ejs
- - Heroku deployment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
