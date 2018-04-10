@@ -54,14 +54,14 @@ Doing a `GET` to `/api/search/findingnemo` should render something like:
       * api register routes
       * error handlers
         * status codes
-  - api routes
+  * api routes
     * GET /api/movies/:query
     * ```response: {"movies": [{name: "<movie-name>", year: "<year-released>"}]}```
-    -   Not Found response
-- Refactor
-  - Sepearte Routes
-  - Request
-  - String Parsing / Object formatting
+    *   Not Found response
+* Refactor
+  * Sepearte Routes
+  * Request
+  * String Parsing / Object formatting
 
 - Stretch Goals
  - ejs

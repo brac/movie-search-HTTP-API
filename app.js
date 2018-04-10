@@ -2,8 +2,7 @@
 
 const express    = require('express')
 const app        = express()
-const rp         = require('request-promise')
-const cheerio    = require('cheerio')
+const movies     = require('./routes/movies')
 
 // Middlewear to set hearders for /api routes
 app.use('/api', (req, res, next) => {
@@ -11,36 +10,11 @@ app.use('/api', (req, res, next) => {
   next()
 })
 
-app.get('/api/movies/:query', (req, res, next) => {
+app.use('/api/movies', movies)
 
-  let options = {
-    uri: `http://www.imdb.com/find?ref_=nv_sr_fn&q=${req.params.query}&s=all`,
-    transform: (body) => { return cheerio.load(body) }
-  }
-
-  rp(options)
-    .then(($) => {
-      let movies = $('.findSection')
-        .first()
-        .find('.result_text')
-
-        .map((i, elem) => {
-          return {
-            name: $(elem).text().split('-')[0].split(' (')[0].trim(),
-            date: $(elem).text().split('-')[0].split(' (')[1].trim().slice(0, -1)}
-        }).toArray()
-      res.send({movies})
-    })
-    .catch( (err) => {
-      next(err)
-  })
-})
-
-
-app.use('/', (req, res) => {
+app.use('*', (req, res) => {
   res.send('Welcome to the movie search API')
 })
-
 
 // Error handler
 app.use((err, req, res, next) => {
@@ -49,7 +23,7 @@ app.use((err, req, res, next) => {
     return next(err)
   }
   res.status(err.status || 500)
-    .json({message: err.message, stack: err.stack})
+    .json({errors: [err.message, err.status]})
 })
 
 app.listen(3000, (req, res) => {
